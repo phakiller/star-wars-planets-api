@@ -25,3 +25,7 @@ class Planet(BaseModel):
         res = await self.insert_one(self.to_dict())
         self._id = res.inserted_id
         return self
+    
+    @classmethod
+    async def get_planets(cls):
+        return await cls.find()
