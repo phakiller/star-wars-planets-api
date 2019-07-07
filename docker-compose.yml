@@ -1,0 +1,28 @@
+version: '3.3'
+
+networks:
+  starwars:
+    driver: bridge
+
+services:
+  star-wars-planets:
+    image: star-wars-planets
+    restart: always
+    ports:
+      - 6606:6606
+    networks:
+      - starwars
+    env_file:
+      - ./local.env
+  
+  mongodb-star-wars-planets:
+    image: bitnami/mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - starwars
+    environment:
+      MONGODB_USERNAME: super_user
+      MONGODB_PASSWORD: super_password
+      MONGODB_DATABASE: star_wars_planets
