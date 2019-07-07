@@ -22,3 +22,8 @@ class PlanetApplication:
         else:
             planets = await Planet.get_planets()
         return PlanetSerializer.Schema().dump(planets.objects, many=True).data
+    
+    async def find_planet_by_id(self, id: str):
+        planet = await Planet.find_planet_by_id(id)
+        if planet:
+            return PlanetSerializer.Schema().dump(planet).data
