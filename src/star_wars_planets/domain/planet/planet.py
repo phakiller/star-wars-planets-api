@@ -41,3 +41,7 @@ class Planet(BaseModel):
                 }
             }
         )
+    
+    @classmethod
+    async def find_planet_by_id(cls, id):
+        return await cls.find_one(id)
