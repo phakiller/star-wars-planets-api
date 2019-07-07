@@ -22,3 +22,15 @@ class PlanetsResource(Resource):
         return json(
             await self.planet_application.get_planets(args.get('name'))
         )
+
+
+class PlanetResource(Resource):
+
+    planet_application: PlanetApplication = PlanetApplication()
+
+    async def get(self, request, planet_id: str) -> HTTPResponse:
+        planet = await self.planet_application.find_planet_by_id(planet_id)
+        return json(
+            planet,
+            status=200 if planet else 404
+        )
