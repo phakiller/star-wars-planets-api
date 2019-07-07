@@ -29,3 +29,15 @@ class Planet(BaseModel):
     @classmethod
     async def get_planets(cls):
         return await cls.find()
+    
+    @classmethod
+    async def find_planets_by_name(cls, name: str):
+        return await cls.find(
+            None,
+            {
+                'name': {
+                    '$regex': name,
+                    '$options': 'ix'
+                }
+            }
+        )
