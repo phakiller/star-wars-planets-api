@@ -15,3 +15,7 @@ class PlanetApplication:
         )
         await self.planet_domain_application.save_planet(planet)
         return PlanetSerializer.Schema().dump(planet).data
+    
+    async def get_planets(self) -> dict:
+        planets = await Planet.get_planets()
+        return PlanetSerializer.Schema().dump(planets.objects, many=True).data
