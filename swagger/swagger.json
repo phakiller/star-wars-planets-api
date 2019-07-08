@@ -14,6 +14,10 @@
         {
             "name": "planet",
             "description": "Manage planets"
+        },
+        {
+            "name": "health",
+            "description": "Application Health"
         }
     ],
     "schemes": ["http"],
@@ -120,6 +124,30 @@
                     },
                     "404": {
                         "description": "Planet not found"
+                    }
+                }
+            }
+        },
+        "/health/status": {
+            "get": {
+                "tags": ["health"],
+                "summary": "Healthcheck route",
+                "description": "",
+                "operationId": "healthcheck",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "format": "string",
+                                    "example": "OK"
+                                }
+                            }
+                        }
                     }
                 }
             }
