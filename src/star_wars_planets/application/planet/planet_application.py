@@ -27,3 +27,8 @@ class PlanetApplication:
         planet = await Planet.find_planet_by_id(id)
         if planet:
             return PlanetSerializer.Schema().dump(planet).data
+    
+    async def delete_planet_by_id(self, id: str):
+        planet = await Planet.delete_planet_by_id(id)
+        if planet:
+            return PlanetSerializer.Schema().dump(planet).data
