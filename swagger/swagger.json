@@ -1,0 +1,172 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "REST APIs to manage Star Wars Planets",
+        "version": "1.0.0",
+        "title": "Swagger Star Wars Planets",
+        "contact": {
+            "email": "pablo.aguilar@fatec.sp.gov.br"
+        },
+        "license": null
+    },
+    "host": "localhost:6606",
+    "tags": [
+        {
+            "name": "planet",
+            "description": "Manage planets"
+        }
+    ],
+    "schemes": ["http"],
+    "paths": {
+        "/planets": {
+            "get": {
+                "tags": ["planet"],
+                "summary": "Get a list of all planets",
+                "description": "",
+                "operationId": "findPlanets",
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "name",
+                    "in": "query",
+                    "description": "Name or part of it to search for",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Planet"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["planet"],
+                "summary": "Add a new planet",
+                "description": "",
+                "operationId": "addPlanet",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Planet object",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/CreatePlanet"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Planet created",
+                        "schema": {
+                            "$ref": "#/definitions/Planet"
+                        }
+                    }
+                }
+            }
+        },
+        "/planets/{planet_id}": {
+            "get": {
+                "tags": ["planet"],
+                "summary": "Find Planet by ID",
+                "description": "Returns a single planet",
+                "operationId": "getPlanetById",
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "planet_id",
+                    "in": "path",
+                    "description": "ID of planet to return",
+                    "required": true,
+                    "type": "string",
+                    "format": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Planet"
+                        }
+                    },
+                    "404": {
+                        "description": "Planet not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["planet"],
+                "summary": "Deletes a planet",
+                "description": "",
+                "operationId": "deletePlanet",
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "planet_id",
+                    "in": "path",
+                    "description": "ID of planet to return",
+                    "required": true,
+                    "type": "string",
+                    "format": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Planet"
+                        }
+                    },
+                    "404": {
+                        "description": "Planet not found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Planet": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "format": "string"
+                },
+                "terrain": {
+                    "type": "string",
+                    "format": "string"
+                },
+                "climate": {
+                    "type": "string",
+                    "format": "string"
+                },
+                "number_of_movies": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "CreatePlanet": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "format": "string"
+                },
+                "terrain": {
+                    "type": "string",
+                    "format": "string"
+                },
+                "climate": {
+                    "type": "string",
+                    "format": "string"
+                }
+            }
+        }
+    }
+}

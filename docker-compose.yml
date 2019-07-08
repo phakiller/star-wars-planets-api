@@ -26,3 +26,13 @@ services:
       MONGODB_USERNAME: super_user
       MONGODB_PASSWORD: super_password
       MONGODB_DATABASE: star_wars_planets
+  
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    restart: always
+    ports:
+      - 6607:8080
+    volumes:
+      - ./swagger:/star_wars
+    environment:
+      SWAGGER_JSON: /star_wars/swagger.json
