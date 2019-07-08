@@ -34,3 +34,10 @@ class PlanetResource(Resource):
             planet,
             status=200 if planet else 404
         )
+    
+    async def delete(self, request, planet_id: str) -> HTTPResponse:
+        planet = await self.planet_application.delete_planet_by_id(planet_id)
+        return json(
+            planet,
+            status=200 if planet else 404
+        )
