@@ -45,3 +45,11 @@ class Planet(BaseModel):
     @classmethod
     async def find_planet_by_id(cls, id):
         return await cls.find_one(id)
+    
+    @classmethod
+    async def delete_planet_by_id(cls, _id: str):
+        return await cls.find_one_and_delete(
+            {
+                '_id': cls.get_oid(_id)
+            }
+        )
