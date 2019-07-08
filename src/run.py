@@ -1,10 +1,12 @@
 from sanic import Sanic
 from sanic_motor import BaseModel
+from sanic_cors import CORS
 
 from config.default import Configuration
 from star_wars_planets.adapters.rest import rest
 
 app = Sanic(__name__)
+CORS(app)
 
 app.blueprint(rest)
 app.config.from_object(Configuration)
